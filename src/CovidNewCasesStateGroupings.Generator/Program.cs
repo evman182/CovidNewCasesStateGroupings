@@ -34,7 +34,8 @@ namespace CovidNewCasesStateGroupings.Generator
                 }
 
                 var expandoState = ((ExpandoObject)row).ToList();
-                for (int x = 13; x < count; x++)
+                const int columnContainingMarch1St = 50;
+                for (int x = columnContainingMarch1St; x < count; x++)
                 {
                     var item = expandoState[x];
                     var newCases = int.Parse(item.Value.ToString()) - int.Parse(expandoState[x - 1].Value.ToString());
