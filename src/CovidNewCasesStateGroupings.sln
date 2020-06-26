@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidNewCasesStateGroupings.Generator", "CovidNewCasesStateGroupings.Generator\CovidNewCasesStateGroupings.Generator.csproj", "{D42009B7-3C37-419B-83AC-3AE92B7CDE4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CovidNewCasesStateGroupings.Site", "CovidNewCasesStateGroupings.Site\CovidNewCasesStateGroupings.Site.csproj", "{F1EE2DE0-7F0C-4199-9A1E-739737F44518}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D42009B7-3C37-419B-83AC-3AE92B7CDE4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42009B7-3C37-419B-83AC-3AE92B7CDE4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42009B7-3C37-419B-83AC-3AE92B7CDE4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42009B7-3C37-419B-83AC-3AE92B7CDE4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1EE2DE0-7F0C-4199-9A1E-739737F44518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1EE2DE0-7F0C-4199-9A1E-739737F44518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1EE2DE0-7F0C-4199-9A1E-739737F44518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EE2DE0-7F0C-4199-9A1E-739737F44518}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29BEFBAF-8F5F-4A09-9A45-23D8F9770EE9}
+	EndGlobalSection
+EndGlobal

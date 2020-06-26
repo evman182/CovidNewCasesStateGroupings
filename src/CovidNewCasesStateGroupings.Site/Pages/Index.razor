@@ -1,0 +1,65 @@
+﻿@page "/"
+@using System.Text.Json
+@inject IJSRuntime JsRuntime
+
+<h1>COVID</h1>
+
+<button class="btn btn-primary" @onclick="@(async () => await GenerateArray())">Test</button>
+<br />
+<div id="curve_chart" style="width: 1200px; height: 700px"></div>
+
+@code {
+    private Dictionary<string, Dictionary<string, int>> _states;
+
+    private async Task GenerateArray()
+    {
+        if (_states == null)
+        {
+            var httpClient = new HttpClient();
+            string statesJson = await httpClient.GetStringAsync("https://gist.githubusercontent.com/evman182/5b3fce9ff50b5a528f6706b1f8f27753/raw/stateData.txt");
+            _states = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, int>>>(statesJson);
+        }
+
+        var groups = new List<HashSet<string>>
+        {
+                new HashSet<string> {"New York", "New Jersey"},
+                new HashSet<string> {"California"},
+                new HashSet<string> {"Florida", "Texas", "Arizona"},
+            };
+
+        var dates = _states.First().Value.Keys.ToList();
+        object[][] array = new object[dates.Count + 1][];
+        array[0] = new object[groups.Count + 2]; // Date column and "Rest of Country"
+        array[0][0] = "Date";
+
+        for (var x = 0; x < dates.Count; x++)
+        {
+            array[x + 1] = new object[groups.Count + 2];
+            array[x + 1][0] = dates[x];
+        }
+
+        for (var gIndex = 0; gIndex < groups.Count; gIndex++)
+        {
+            HashSet<string> group = groups[gIndex];
+            array[0][gIndex + 1] = string.Join("/", group);
+
+            List<Dictionary<string, int>> statesInGroup = group.Select(m => _states[m]).ToList();
+            for (var x = 0; x < dates.Count; x++)
+            {
+                var date = dates[x];
+                array[x + 1][gIndex + 1] = statesInGroup.Sum(s => s[date]);
+            }
+        }
+
+        array[0][groups.Count + 1] = "Rest of Country";
+        List<Dictionary<string, int>> restOfCountry =
+            _states.Where(s => !groups.SelectMany(sg => sg).ToHashSet().Contains(s.Key)).Select(s => s.Value).ToList();
+        for (var x = 0; x < dates.Count; x++)
+        {
+            var date = dates[x];
+            array[x + 1][groups.Count + 1] = restOfCountry.Sum(s => s[date]);
+        }
+
+        await JsRuntime.InvokeAsync<string>("drawChart", (object)array);
+    }
+}
