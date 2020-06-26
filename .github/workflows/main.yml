@@ -23,6 +23,8 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Generate State Data
+      env:
+        DOTNET_NOLOGO: true
       run: dotnet run --project $GITHUB_WORKSPACE/src/CovidNewCasesStateGroupings.Generator > stateData.txt
 
     # Runs a set of commands using the runners shell
@@ -32,6 +34,6 @@ jobs:
       with:
         auth: ${{ secrets.GIST_TOKEN }}
         gist_url: https://gist.github.com/evman182/5b3fce9ff50b5a528f6706b1f8f27753
-        gist_title: stateData
+        gist_title: stateData.txt
         gist_description: stateData
         github_file: stateData.txt
